@@ -72,7 +72,7 @@ class Query:
             print(f'{self.output}{60*" "}{self.input}')
         else:
             print(f'{self.input}{60*" "}{self.output}')
-        for result in results:
+        for result in results[:25]:
             text_results = result.findAll('td', {'class': 'td7nl'})
             input_field = text_results[0].findAll('a')
             output_field = text_results[1].findAll('a')
