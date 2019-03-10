@@ -72,7 +72,7 @@ class Query:
             print(f'{self.output}{60*" "}{self.input}')
         else:
             print(f'{self.input}{60*" "}{self.output}')
-        for result in results[:5]:
+        for result in results:
             text_results = result.findAll('td', {'class': 'td7nl'})
             input_field = text_results[0].findAll('a')
             output_field = text_results[1].findAll('a')
@@ -81,7 +81,7 @@ class Query:
             inplen = 0
             for text_field in input_field:
                 print(f'{text_field.text.strip()} ', end='')
-                inplen+=len(text_field.text)
+                inplen+=len(text_field.text)+1
 
             print((60-inplen)*'.', end=' ')
             
@@ -89,6 +89,12 @@ class Query:
                 print(f'{text_field.text.strip()} ', end='')
 
             print('')
+            try:
+                if(not result.next_sibling.next_sibling.has_attr('id')):
+                    print('\n' + result.next_sibling.next_sibling.text)
+                    print(60*'_'+'\n')
+            except:
+                continue
 
 
 if __name__ == '__main__':
