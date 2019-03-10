@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup as sp
+import re
 import requests
 import argparse
 
@@ -49,9 +50,45 @@ class Query:
 
     # making html request that is yet to be parsed. The object info is: (input-language, output-language, word)
     def make_request(self): 
-        url = f'https://{self.input}-{self.output}.dict.cc/?s={self.word}'
-        r = requests.get(url)
-        print(url)
+        # html request
+        url = f'https://{self.input}{self.output}.dict.cc/?s={self.word}'
+        r = requests.get(url, headers={'User-agent': 'Chrome/72.0.3626.121'})
+
+        # parsing stuff
+        soup = sp(r.text, 'html.parser')
+        results = soup.findAll('tr', id = re.compile('^tr'))
+
+        if(soup.title.text == 'Sorry!'):
+            print('This language pair is not supported at the moment.')
+            return
+
+        # in case nothing was found
+        if(len(results) == 0):
+            print('No results found for that word.')
+            return
+        
+        # parsing field from the left (input-lang) and the right (output-lang) to be displayed correctly
+        if(self.input == 'de'):
+            print(f'{self.output}{60*" "}{self.input}')
+        else:
+            print(f'{self.input}{60*" "}{self.output}')
+        for result in results[:5]:
+            text_results = result.findAll('td', {'class': 'td7nl'})
+            input_field = text_results[0].findAll('a')
+            output_field = text_results[1].findAll('a')
+            
+            # making things more readable
+            inplen = 0
+            for text_field in input_field:
+                print(f'{text_field.text.strip()} ', end='')
+                inplen+=len(text_field.text)
+
+            print((60-inplen)*'.', end=' ')
+            
+            for text_field in output_field:
+                print(f'{text_field.text.strip()} ', end='')
+
+            print('')
 
 
 if __name__ == '__main__':
