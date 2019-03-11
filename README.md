@@ -29,3 +29,5 @@ pip3 install -r requirements.txt
 
 - something with images would be nice.
 - cleaner GUI
+- known bug that i havent fixed yet: strings are literally parsed. So a single word with single quotation marks won't be a good query
+- maybe try a different translating method, a good API would be cool...
