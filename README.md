@@ -27,6 +27,21 @@ pip3 install -r requirements.txt
 - help: shows help
 - lookup: looks up a word or phrase in dictcc
 
+### Screenshot example:
+
+Let's say I'm trying to find out what the expression "to download something" is in German:
+
+```
+/lookup en de to download sth.
+```
+This is what the query result will be:
+
+![image](https://i.imgur.com/gP00lvy.png)
+
+This is the file contents:
+
+![image](https://i.imgur.com/iG6VIFJ.png)
+
 ### TODO
 
 - something with images would be nice.
