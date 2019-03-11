@@ -6,6 +6,8 @@ So yea, this may be *really bad*.
 
 The idea behind it came when I was struggling to read a book in German and I wanted to do something else. So the next day I decided I was going to make a Telegram bot in under 24 hours. This monstruosity is the final product (or at least the alpha? hehe)
 
+This bot **does not translate words/sentences**. It looks them up in a dictionary. 
+
 ### How to install:
 
 I highly recommend doing this in a virtualenv:
