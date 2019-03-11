@@ -31,10 +31,12 @@ class InputError(Exception):
     def __str__(self):
         return f'Sorry, {self.lang} is not an accepted language. Available languages are:\n{languages}\n Remember to use language codes in the input)'
 
+# raised when query has 0 results
 class QueryError(Exception):
     def __str__(self):
         return f'Sorry, couldn\'t find any results'
 
+# raised when language pair is invalid
 class PairError(Exception):
     def __str__(self):
         return f'Sorry, this language pair is not yet available'
@@ -101,13 +103,13 @@ class Query:
             if result == results[0]:
                 for text_field in input_field:
                     with open('first_result.txt', 'a') as f2:
-                        f2.write(f'{text_field.text.strip() }')
+                        f2.write(f'{text_field.text.strip()} ')
                 with open('first_result.txt', 'a') as f2:
                     f2.write('\n==\n')
 
                 for text_field in output_field:
                     with open('first_result.txt', 'a') as f2:
-                        f2.write(f'{text_field.text.strip() }')
+                        f2.write(f'{text_field.text.strip()} ')
 
             # making things more readable
             inplen = 0
