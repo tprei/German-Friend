@@ -69,6 +69,12 @@ class Query:
         self.output = output_lang
         self.word = word
 
+    def get_first_result(self, field): 
+            for text_field in field:
+                with open('first_result.txt', 'a') as f2:
+                    f2.write(f'{text_field.text.strip()} ')
+
+
     # making html request that is yet to be parsed. The object info is: (input-language, output-language, word)
     def make_request(self): 
         # html request
@@ -95,21 +101,26 @@ class Query:
             with open('query.txt', 'a') as f:
                 f.write(f'{self.input}{60*" "}{self.output}\n')
 
+        # each 'translation'
         for result in results[:30]:
             text_results = result.findAll('td', {'class': 'td7nl'})
             input_field = text_results[0].findAll('a')
             output_field = text_results[1].findAll('a')
 
             if result == results[0]:
-                for text_field in input_field:
-                    with open('first_result.txt', 'a') as f2:
-                        f2.write(f'{text_field.text.strip()} ')
-                with open('first_result.txt', 'a') as f2:
-                    f2.write('\n==\n')
 
-                for text_field in output_field:
+                if(self.input == 'de' and self.output == 'en'):
+                    self.get_first_result(output_field)
                     with open('first_result.txt', 'a') as f2:
-                        f2.write(f'{text_field.text.strip()} ')
+                        f2.write('\n==\n')
+                    self.get_first_result(input_field)
+
+                else:
+                    self.get_first_result(input_field)
+                    with open('first_result.txt', 'a') as f2:
+                        f2.write('\n==\n')
+                    self.get_first_result(output_field)
+
 
             # making things more readable
             inplen = 0

@@ -75,6 +75,8 @@ def lookup(msg):
         bot.send_message(msg.chat.id, 'Wrong formatting, see /help for more information on the /lookup command')
         return
 
+    arguments = list((x.strip() for x in arguments))
+
     if arguments[1] == arguments[2]:
         bot.send_message(msg.chat.id, '<input_lang> and <output_lang> must be different')
     elif isinstance(arguments[1], str) and len(arguments[1]) == 2 and isinstance(arguments[2], str) and len(arguments[2]) == 2:
