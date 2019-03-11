@@ -3,8 +3,10 @@ import re
 import requests
 import argparse
 
-f = open('query.txt', 'w+')
-f2 = open('first_result.txt', 'w+')
+with open('query.txt', 'w+') as f:
+    pass
+with open('first_result.txt', 'w+'):
+    pass
 
 languages = {
     'en': 'english',
@@ -85,9 +87,12 @@ class Query:
 
         # parsing field from the left (input-lang) and the right (output-lang) to be displayed correctly
         if self.input == 'de':
-            f.write(f'{self.output}{60*" "}{self.input}\n')
+            with open('query.txt', 'a') as f:
+                f.write(f'{self.output}{60*" "}{self.input}\n')
         else:
-            f.write(f'{self.input}{60*" "}{self.output}\n')
+            with open('query.txt', 'a') as f:
+                f.write(f'{self.input}{60*" "}{self.output}\n')
+
         for result in results[:30]:
             text_results = result.findAll('td', {'class': 'td7nl'})
             input_field = text_results[0].findAll('a')
@@ -95,30 +100,36 @@ class Query:
 
             if result == results[0]:
                 for text_field in input_field:
-                    f2.write(f'{text_field.text.strip() }')
-                f2.write('\n==\n')
+                    with open('first_result.txt', 'a') as f2:
+                        f2.write(f'{text_field.text.strip() }')
+                with open('first_result.txt', 'a') as f2:
+                    f2.write('\n==\n')
 
                 for text_field in output_field:
-                    f2.write(f'{text_field.text.strip() }')
-                f2.close()
+                    with open('first_result.txt', 'a') as f2:
+                        f2.write(f'{text_field.text.strip() }')
 
             # making things more readable
             inplen = 0
             for text_field in input_field:
-                f.write(f'{text_field.text.strip()} ')
+                with open('query.txt', 'a') as f:
+                    f.write(f'{text_field.text.strip()} ')
                 inplen+=len(text_field.text)+1
 
-            f.write((60-inplen)*'.' + ' ')
+            with open('query.txt', 'a') as f:
+                f.write((60-inplen)*'.' + ' ')
             
             for text_field in output_field:
-                f.write(f'{text_field.text.strip()} ')
+                with open('query.txt', 'a') as f:
+                    f.write(f'{text_field.text.strip()} ')
 
-            f.write('\n')
+            with open('query.txt', 'a') as f:
+                f.write('\n')
             try:
                 if not result.next_sibling.next_sibling.has_attr('id'):
-                    f.write('\n' + result.next_sibling.next_sibling.text + '\n')
-                    f.write(60*'_'+'\n'+'\n')
+                    with open('query.txt', 'a') as f:
+                        f.write('\n' + result.next_sibling.next_sibling.text + '\n')
+                        f.write(60*'_'+'\n'+'\n')
             except:
                 continue
-        f.close()
  

@@ -48,6 +48,13 @@ Where,
 PS: <input_lang> and <output_lang> *must* be different.
 """
 
+def clear_files():
+    with open('first_result.txt', 'w+') as f:
+        f.write('')
+    with open('query.txt', 'w+') as f:
+        f.write('')
+    return
+
 @bot.message_handler(commands=['start'])
 def welcome(msg):
     bot.reply_to(msg, 'Hey! I\'m over here')
@@ -58,9 +65,16 @@ def helpm(msg):
 
 @bot.message_handler(commands=['lookup'])
 def lookup(msg):
+
+    clear_files()
+
     #arguments = list['/lookup', 'input_lang', 'output_lang', 'word']
-    arguments = msg.text.split()
+    arguments = msg.text.split(' ', 3)
     
+    if len(arguments) < 4:
+        bot.send_message(msg.chat.id, 'Wrong formatting, see /help for more information on the /lookup command')
+        return
+
     if arguments[1] == arguments[2]:
         bot.send_message(msg.chat.id, '<input_lang> and <output_lang> must be different')
     elif isinstance(arguments[1], str) and len(arguments[1]) == 2 and isinstance(arguments[2], str) and len(arguments[2]) == 2:
