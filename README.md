@@ -25,7 +25,7 @@ pip3 install -r requirements.txt
 
 - start: just pings the bot to check if it's running
 - help: shows help
-- lookup: looks up a word in dictcc (or phrase, if you put it inside single quotation marks like this: 'this is a phrase')
+- lookup: looks up a word or phrase in dictcc
 
 ### TODO
 
@@ -33,3 +33,4 @@ pip3 install -r requirements.txt
 - cleaner GUI
 - known bug that i havent fixed yet: strings are literally parsed. So a single word with single quotation marks won't be a good query
 - maybe try a different translating method, a good API would be cool...
+- files that only have one occurrence are useless.
