@@ -1,4 +1,7 @@
 # German Friend
+
+https://t.me/langf_bot
+
 ## A Telegram bot to help you with the everyday ~~German~~ translating struggle.
 
 Okay, so. I've never really made any Telegram bots, this is a first for me.
