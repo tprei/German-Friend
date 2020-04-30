@@ -4,10 +4,7 @@ https://t.me/langf_bot
 
 ## A Telegram bot to help you with the everyday ~~German~~ translating struggle.
 
-Okay, so. I've never really made any Telegram bots, this is a first for me.
-So yea, this may be *really bad*. 
-
-The idea behind it came when I was struggling to read a book in German and I wanted to do something else. So the next day I decided I was going to make a Telegram bot in under 24 hours. This monstruosity is the final product (or at least the alpha? hehe)
+The idea behind it came when I was struggling to read a book in German and I wanted to do something else. So the next day I decided I was going to make a Telegram bot in under 24 hours. This is the final product (or at least the alpha? hehe)
 
 This bot **does not translate words/sentences**. It looks them up in a dictionary. 
 
